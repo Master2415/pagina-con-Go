@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concesionario - Imágenes de Autos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Playfair Display', sans-serif;
+            background: linear-gradient(45deg, #fbf70430 0%, #cacaca 100%);
+            background-size: 200% 200%;
+            animation: gradient 15s ease infinite;
+            cursor: none; /* Oculta el cursor estándar */
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .custom-cursor {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border: 2px solid rgb(6, 0, 0);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1000;
+            transition: transform 0.1s ease-out, background-color 0.2s ease-out;
+        }
+
+        .custom-cursor:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        h1, h2 {
+            font-family: 'Playfair Display', sans-serif;
+            color: #000000;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+        }
+
+        h4 {
+            color: #001b22;
+            margin: 0;
+        }
+
+        /* Efecto para las imágenes */
+        .img-thumbnail {
+            transition: transform 0.5s ease-in-out, box-shadow 0.5s;
+        }
+
+        .img-thumbnail:hover {
+            transform: scale(1.15);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Contenedor y pie de página */
+        .container, footer {
+            background-color: #95a5a644;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.822);
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .container {
+            color: white;
+        }
+
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            padding: 10px;
+        }
+
+        /* Tamaños uniformes */
+        .container, footer {
+            min-height: 150px;
+        }
+
+        /* Cursor personalizado */
+        body:hover .custom-cursor {
+            visibility: visible;
+        }
+
+        .hidden-cursor {
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="custom-cursor hidden-cursor" id="customCursor"></div>
+
+    <div class="container mt-5">
+        <h1 class="text-center">Bienvenido</h1>
+
+        <h2 class="text-center my-4">Imágenes de Autos x64</h2>
+        <div class="row">
+            {{range .RandomImgs}}
+            <div class="col-md-3 mb-4 d-flex justify-content-center">
+                <img src="data:image/png;base64,{{.}}" class="img-fluid img-thumbnail" />
+            </div>
+            {{end}}
+        </div>
+    </div>
+
+    <footer>
+        <h4>Nombre del equipo: {{.HostName}}</h4>
+        <h4>Nombre del integrante: {{.Name}}</h4>
+    </footer>
+
+    <script>
+        // Manejo del cursor personalizado
+        const cursor = document.getElementById('customCursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.top = `${e.clientY}px`;
+            cursor.style.left = `${e.clientX}px`;
+        });
+
+        // Mostrar el cursor cuando se mueve
+        document.addEventListener('mouseover', () => {
+            cursor.classList.remove('hidden-cursor');
+        });
+
+        // Ocultar el cursor cuando está quieto
+        let timeout;
+        document.addEventListener('mousemove', () => {
+            clearTimeout(timeout);
+            cursor.classList.remove('hidden-cursor');
+            timeout = setTimeout(() => cursor.classList.add('hidden-cursor'), 1000);
+        });
+        
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
