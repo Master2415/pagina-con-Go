@@ -8,22 +8,88 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Sacramento&display=swap" rel="stylesheet">
 
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box !important;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
         body {
-            font-family: 'Playfair Display', sans-serif;
-            background: linear-gradient(45deg, #fbf70430 0%, #cacaca 100%);
-            background-size: 200% 200%;
-            animation: gradient 15s ease infinite;
-            cursor: none; /* Oculta el cursor estándar */
+            display: table;
+            width: 100%;
+            height: 100%;
+            background-color: #171717;
+            color: #000;
+            line-height: 1.6;
+            position: relative;
+            font-family: sans-serif;
+            overflow: hidden;
+            cursor: none;
         }
 
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* Fondo en segundo plano */
+        .lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            margin: auto;
+            width: 90vw;
+            z-index: 0; /* Fondo atrás */
         }
 
+        .lines .line {
+            position: absolute;
+            width: 1px;
+            height: 100%;
+            top: 0;
+            left: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+
+        .lines .line::after {
+            content: "";
+            display: block;
+            position: absolute;
+            height: 15vh;
+            width: 100%;
+            top: -50%;
+            left: 0;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 75%, #ffffff 100%);
+            animation: run 7s 0s infinite cubic-bezier(0.4, 0.26, 0, 0.97);
+        }
+
+        .lines .line:nth-child(1) {
+            margin-left: -25%;
+        }
+
+        .lines .line:nth-child(1)::after {
+            animation-delay: 2s;
+        }
+
+        .lines .line:nth-child(3) {
+            margin-left: 25%;
+        }
+
+        .lines .line:nth-child(3)::after {
+            animation-delay: 2.5s;
+        }
+
+        @keyframes run {
+            0% { top: -50%; }
+            100% { top: 110%; }
+        }
+
+        /* Cursor personalizado */
         .custom-cursor {
             position: absolute;
             width: 30px;
@@ -40,60 +106,6 @@
             background-color: rgba(255, 255, 255, 0.8);
         }
 
-        h1, h2 {
-            font-family: 'Playfair Display', sans-serif;
-            color: #000000;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-        }
-
-        h2 {
-            font-size: 1.8rem;
-        }
-
-        h4 {
-            color: #001b22;
-            margin: 0;
-        }
-
-        /* Efecto para las imágenes */
-        .img-thumbnail {
-            transition: transform 0.5s ease-in-out, box-shadow 0.5s;
-        }
-
-        .img-thumbnail:hover {
-            transform: scale(1.15);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Contenedor y pie de página */
-        .container, footer {
-            background-color: #95a5a644;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.822);
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        .container {
-            color: white;
-        }
-
-        footer {
-            margin-top: 20px;
-            text-align: center;
-            padding: 10px;
-        }
-
-        /* Tamaños uniformes */
-        .container, footer {
-            min-height: 150px;
-        }
-
-        /* Cursor personalizado */
         body:hover .custom-cursor {
             visibility: visible;
         }
@@ -101,16 +113,129 @@
         .hidden-cursor {
             visibility: hidden;
         }
+
+        /* Estilo para h1 */
+        h1 {
+            font-size: calc(20px + 18vh);
+            line-height: calc(20px + 20vh);
+            text-shadow: 0 0 5px #ffa500, 0 0 15px #ffa500, 0 0 20px #ffa500,
+                        0 0 40px #ffa500, 0 0 60px #ff0000, 0 0 10px #ff8d00,
+                        0 0 98px #ff0000;
+            color: #fff6a9;
+            font-family: 'Sacramento', cursive;
+            text-align: center;
+            animation: blink 4s infinite;
+        }
+
+            /* Estilo para h4 (texto debajo de Bienvenido) */
+            h4 {
+                font-size: 1rem; /* Ajusta el tamaño según lo desees */
+                line-height: 1.2;
+                color: #fefefe; /* Color dorado */
+                font-family: 'Poppins', sans-serif; /* Cambia la fuente a Poppins */
+                text-align: center;
+                margin-top: 20px; /* Espaciado superior */
+                animation: blink 80s infinite; /* Mantiene la animación */
+            }
+
+            /* Estilo para el footer */
+            footer h4 {
+                font-size: 1.8rem; /* Ajusta el tamaño según lo desees */
+                line-height: 1.2;
+                color: #fefefe; /* Color dorado */
+                font-family: 'Poppins', sans-serif; /* Cambia la fuente a Poppins */
+                text-align: center;
+                margin: 10px 0; /* Espaciado vertical */
+            }
+
+
+
+        @keyframes blink {
+            20%, 24%, 55% {
+                color: #111;
+                text-shadow: none;
+            }
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                text-shadow: 0 0 5px #ffa500, 0 0 15px #ffa500, 0 0 20px #ffa500,
+                             0 0 40px #ffa500, 0 0 60px #ff0000, 0 0 10px #ff8d00,
+                             0 0 98px #ff0000;
+                color: #fff6a9;
+            }
+        }
+
+        /* Estilo contenedores */
+        .container, footer {
+            background-color: rgb(0, 0, 0); /* Fondo del contenedor semitransparente */
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.486); /* Sombra */
+            max-width: 1200px;
+            margin: auto;
+            z-index: 10; /* Asegura que esté delante del fondo */
+            position: relative;
+        }
+
+        /* Estilo de imágenes con bordes personalizados */
+        .img-thumbnail {
+            position: relative;
+            z-index: 2;
+            padding: 1.5rem 2rem;
+            border: 0.1rem solid currentColor;
+            color: #c19c06;
+            background: transparent;
+            transition: transform 0.5s ease-in-out, box-shadow 0.5s;
+        }
+
+        .img-thumbnail:hover {
+            transform: scale(1.15);
+            box-shadow: 0 12px 24px rgba(255, 255, 255, 0.3);
+            color: rgb(199, 0, 33);
+        }
+
+        .img-thumbnail::before, .img-thumbnail::after {
+            content: '';
+            position: absolute;
+            background: #2f2f2f;
+            transition: all 0.3s;
+            z-index: 1;
+        }
+
+        .img-thumbnail::before {
+            width: calc(100% - 3rem);
+            height: calc(101% + 1rem);
+            top: -0.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .img-thumbnail::after {
+            height: calc(100% - 3rem);
+            width: calc(101% + 1rem);
+            left: -0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            padding: 10px;
+            color: white;
+        }
     </style>
 </head>
 
 <body>
     <div class="custom-cursor hidden-cursor" id="customCursor"></div>
+    <div class="lines">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
 
     <div class="container mt-5">
         <h1 class="text-center">Bienvenido</h1>
-
-        <h2 class="text-center my-4">Imágenes de Autos x64</h2>
+        <h4 class="text-center my-4">Imágenes de Autos x64</h4>
         <div class="row">
             {{range .RandomImgs}}
             <div class="col-md-3 mb-4 d-flex justify-content-center">
@@ -138,17 +263,13 @@
             cursor.classList.remove('hidden-cursor');
         });
 
-        // Ocultar el cursor cuando está quieto
+        // Ocultar el cursor cuando no se mueve
         let timeout;
         document.addEventListener('mousemove', () => {
             clearTimeout(timeout);
-            cursor.classList.remove('hidden-cursor');
-            timeout = setTimeout(() => cursor.classList.add('hidden-cursor'), 1000);
+            timeout = setTimeout(() => cursor.classList.add('hidden-cursor'), 5000);
         });
-        
     </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
